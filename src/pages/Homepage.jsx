@@ -4,15 +4,31 @@ import { useNavigate } from "react-router-dom";
 import DescriptionRounded from "@mui/icons-material/DescriptionRounded";
 import FormatAlignLeftOutlined from "@mui/icons-material/FormatAlignLeftOutlined";
 import ChatRounded from "@mui/icons-material/ChatRounded";
-import ImageSearchIcon from '@mui/icons-material/ImageSearch';
-import EmailIcon from '@mui/icons-material/Email';
-import CodeIcon from '@mui/icons-material/Code';
+import ImageSearchIcon from "@mui/icons-material/ImageSearch";
+import EmailIcon from "@mui/icons-material/Email";
+import CodeIcon from "@mui/icons-material/Code";
 const Homepage = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "row", justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
-        <Box p={3} sx={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center' }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        <Box
+          p={3}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Typography variant="h4" mb={2} fontWeight="bold">
             Text Generation
           </Typography>
@@ -20,9 +36,9 @@ const Homepage = () => {
             onClick={() => navigate("/summary")}
             sx={{
               boxShadow: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               borderRadius: 5,
               height: 250,
               width: 250,
@@ -37,7 +53,16 @@ const Homepage = () => {
             <DescriptionRounded
               sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
             />
-            <Stack p={3} pt={0} mt={2} sx={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
+            <Stack
+              p={3}
+              pt={0}
+              mt={2}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Typography fontWeight="bold" variant="h5">
                 Text Summarizer
               </Typography>
@@ -47,7 +72,15 @@ const Homepage = () => {
             </Stack>
           </Card>
         </Box>
-        <Box p={3} sx={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center' }}>
+        <Box
+          p={3}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Typography variant="h4" mb={2} fontWeight="bold">
             Paragraph Generation
           </Typography>
@@ -55,9 +88,9 @@ const Homepage = () => {
             onClick={() => navigate("/paragraph")}
             sx={{
               boxShadow: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               borderRadius: 5,
               height: 250,
               width: 250,
@@ -72,7 +105,16 @@ const Homepage = () => {
             <FormatAlignLeftOutlined
               sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
             />
-            <Stack p={3} pt={0} mt={2} sx={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
+            <Stack
+              p={3}
+              pt={0}
+              mt={2}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Typography fontWeight="bold" variant="h5">
                 Paragraph Generator
               </Typography>
@@ -82,7 +124,15 @@ const Homepage = () => {
             </Stack>
           </Card>
         </Box>
-        <Box p={3} sx={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center' }}>
+        <Box
+          p={3}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Typography variant="h4" mb={2} fontWeight="bold">
             AI ChatBot
           </Typography>
@@ -90,9 +140,9 @@ const Homepage = () => {
             onClick={() => navigate("/chatbot")}
             sx={{
               boxShadow: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               borderRadius: 5,
               height: 250,
               width: 250,
@@ -107,7 +157,16 @@ const Homepage = () => {
             <ChatRounded
               sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
             />
-            <Stack p={3} pt={0} mt={2} sx={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
+            <Stack
+              p={3}
+              pt={0}
+              mt={2}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Typography fontWeight="bold" variant="h5">
                 Chatbot
               </Typography>
@@ -115,17 +174,25 @@ const Homepage = () => {
             </Stack>
           </Card>
         </Box>
-        <Box p={3} sx={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center' }}>
+        <Box
+          p={3}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Typography variant="h4" mb={2} fontWeight="bold">
-          Email Generation
+            Email Generation
           </Typography>
           <Card
             onClick={() => navigate("/email-generation")}
             sx={{
               boxShadow: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               borderRadius: 5,
               height: 250,
               width: 250,
@@ -140,15 +207,34 @@ const Homepage = () => {
             <EmailIcon
               sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
             />
-            <Stack p={3} pt={0} mt={2} sx={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
+            <Stack
+              p={3}
+              pt={0}
+              mt={2}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Typography fontWeight="bold" variant="h5">
                 Email Generation
               </Typography>
-              <Typography variant="h6">generate professional email using ai</Typography>
+              <Typography variant="h6">
+                generate professional email using ai
+              </Typography>
             </Stack>
           </Card>
         </Box>
-        <Box p={3} sx={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center' }}>
+        <Box
+          p={3}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Typography variant="h4" mb={2} fontWeight="bold">
             Javascript Converter
           </Typography>
@@ -156,9 +242,9 @@ const Homepage = () => {
             onClick={() => navigate("/js-converter")}
             sx={{
               boxShadow: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               borderRadius: 5,
               height: 250,
               width: 250,
@@ -173,7 +259,16 @@ const Homepage = () => {
             <CodeIcon
               sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
             />
-            <Stack p={3} pt={0} mt={2} sx={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
+            <Stack
+              p={3}
+              pt={0}
+              mt={2}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Typography fontWeight="bold" variant="h5">
                 JS CONVERTER
               </Typography>
@@ -183,18 +278,26 @@ const Homepage = () => {
             </Stack>
           </Card>
         </Box>
-    
-        <Box p={3} sx={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center' }}>
+
+        <Box
+          p={3}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Typography variant="h4" mb={2} fontWeight="bold">
-            AI  Image Generation
+            AI Image Generation
           </Typography>
           <Card
             onClick={() => navigate("/image-generation")}
             sx={{
               boxShadow: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               borderRadius: 5,
               height: 250,
               width: 250,
@@ -209,11 +312,70 @@ const Homepage = () => {
             <ImageSearchIcon
               sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
             />
-            <Stack p={3} pt={0} mt={2} sx={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
+            <Stack
+              p={3}
+              pt={0}
+              mt={2}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Typography fontWeight="bold" variant="h5">
                 Image Generation
               </Typography>
-              <Typography variant="h6">Generate  images</Typography>
+              <Typography variant="h6">Generate images</Typography>
+            </Stack>
+          </Card>
+        </Box>
+        <Box
+          p={3}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h4" mb={2} fontWeight="bold">
+            Javascript Converter
+          </Typography>
+          <Card
+            onClick={() => navigate("/history")}
+            sx={{
+              boxShadow: 2,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              borderRadius: 5,
+              height: 250,
+              width: 250,
+              "&:hover": {
+                border: 2,
+                boxShadow: 0,
+                borderColor: "primary.dark",
+                cursor: "pointer",
+              },
+            }}
+          >
+            <CodeIcon
+              sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
+            />
+            <Stack
+              p={3}
+              pt={0}
+              mt={2}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Typography fontWeight="bold" variant="h5">
+                History
+              </Typography>
+              <Typography variant="h6">prompt history </Typography>
             </Stack>
           </Card>
         </Box>

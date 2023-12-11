@@ -30,9 +30,19 @@ const Email = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        setLoading(true)
-      const { data } = await axios.post("http://localhost:8080/api/v1/openai/email", { text });
-      setLoading(false)
+      setLoading(true);
+      let jwtToken = localStorage.getItem("accessToken");
+
+      const { data } = await axios.post(
+        "http://localhost:8080/api/v1/openai/email",
+        { text },
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+      setLoading(false);
       console.log(data);
       setResponse(data);
     } catch (err) {
@@ -49,103 +59,107 @@ const Email = () => {
   };
   return (
     <>
-      {
-        !loggedIn ? (
-          <Box p={10} sx={{ display: 'flex', justifyContent: 'center', alignContent: 'flex-start' }}>
-            <Typography variant="h3">
-              Please
-              <Link to={'/login'} >Log In</Link>
-              to Continue
+      {!loggedIn ? (
+        <Box
+          p={10}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "flex-start",
+          }}
+        >
+          <Typography variant="h3">
+            Please
+            <Link to={"/login"}>Log In</Link>
+            to Continue
+          </Typography>
+        </Box>
+      ) : (
+        <Box
+          width={isNotMobile ? "40%" : "80%"}
+          p={"2rem"}
+          m={"2rem auto"}
+          borderRadius={5}
+          sx={{ boxShadow: 5 }}
+          backgroundColor={theme.palette.background.alt}
+        >
+          <Collapse in={error !== ""}>
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          </Collapse>
+          <form onSubmit={handleSubmit}>
+            <Typography variant="h3">Create a Professional Email</Typography>
+
+            <TextField
+              placeholder="Add your text"
+              type="text"
+              multiline={true}
+              required
+              margin="normal"
+              fullWidth
+              value={text}
+              onChange={(e) => {
+                settext(e.target.value);
+              }}
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              size="large"
+              sx={{ color: "white", mt: 2 }}
+              disabled={loading}
+            >
+              Generate email
+            </Button>
+            <Typography mt={2}>
+              Not this tool ? <Link to="/">GO BACK</Link>
             </Typography>
-          </Box>
-        ) : (
-          <Box
-            width={isNotMobile ? "40%" : "80%"}
-            p={"2rem"}
-            m={"2rem auto"}
-            borderRadius={5}
-            sx={{ boxShadow: 5 }}
-            backgroundColor={theme.palette.background.alt}
-          >
-            <Collapse in={error !== ''}>
-              <Alert severity="error" sx={{ mb: 2 }}>
-                {error}
-              </Alert>
-            </Collapse>
-            <form onSubmit={handleSubmit}>
-              <Typography variant="h3">Create a Professional Email</Typography>
+          </form>
 
-              <TextField
-                placeholder="Add your text"
-                type="text"
-                multiline={true}
-                required
-                margin="normal"
-                fullWidth
-                value={text}
-                onChange={(e) => {
-                  settext(e.target.value);
+          {response ? (
+            <Card
+              sx={{
+                mt: 4,
+                border: 1,
+                boxShadow: 0,
+                height: "500px",
+                borderRadius: 5,
+                borderColor: "natural.medium",
+                bgcolor: "background.default",
+              }}
+            >
+              <Typography p={2}>{response}</Typography>
+            </Card>
+          ) : (
+            <Card
+              sx={{
+                mt: 4,
+                border: 1,
+                boxShadow: 0,
+                height: "500px",
+                borderRadius: 5,
+                borderColor: "natural.medium",
+                bgcolor: "background.default",
+              }}
+            >
+              <Typography
+                variant="h5"
+                color="natural.main"
+                sx={{
+                  textAlign: "center",
+                  verticalAlign: "middel",
+                  lineHeight: "450px",
                 }}
-              />
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                size="large"
-                sx={{ color: "white", mt: 2 }}
-                disabled={loading}
               >
-                Generate email
-              </Button>
-              <Typography mt={2}>
-                Not this tool ? <Link to="/">GO BACK</Link>
+                Bot's Response (Please wait for few secs after submitting...)
               </Typography>
-            </form>
-
-            {response ? (
-              <Card
-                sx={{
-                  mt: 4,
-                  border: 1,
-                  boxShadow: 0,
-                  height: "500px",
-                  borderRadius: 5,
-                  borderColor: "natural.medium",
-                  bgcolor: "background.default",
-                }}
-              >
-                <Typography p={2}>{response}</Typography>
-              </Card>
-            ) : (
-              <Card
-                sx={{
-                  mt: 4,
-                  border: 1,
-                  boxShadow: 0,
-                  height: "500px",
-                  borderRadius: 5,
-                  borderColor: "natural.medium",
-                  bgcolor: "background.default",
-                }}
-              >
-                <Typography
-                  variant="h5"
-                  color="natural.main"
-                  sx={{
-                    textAlign: "center",
-                    verticalAlign: "middel",
-                    lineHeight: "450px",
-                  }}
-                >
-                  Bot's Response
-                  (Please wait for few secs after submitting...)
-                </Typography>
-              </Card>
-            )}
-          </Box>
-        )
-      }
+            </Card>
+          )}
+        </Box>
+      )}
     </>
   );
 };

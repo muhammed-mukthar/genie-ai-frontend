@@ -15,6 +15,7 @@ import JsConverter from "./pages/JsConverter";
 import Footer from "./components/Footer";
 import ImageGeneration from "./pages/ImageGeneration";
 import Email from "./pages/Email";
+import History from "./pages/History";
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings()), []);
@@ -35,7 +36,7 @@ function App() {
           <Route path="/js-converter" element={<JsConverter />} />
           <Route path="/image-generation" element={<ImageGeneration />} />
           <Route path="/email-generation" element={<Email />} />
-
+          <Route path="/history" element={<History />} />
         </Routes>
         <Footer />
       </ThemeProvider>

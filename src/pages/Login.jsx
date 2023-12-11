@@ -28,11 +28,16 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true)
-      await axios.post("http://localhost:8080/api/v1/auth/login", { email, password });
-      setLoading(false)
+      setLoading(true);
+      let response = await axios.post(
+        "http://localhost:8080/api/v1/auth/login",
+        { email, password }
+      );
+      setLoading(false);
       toast.success("Logged in Successfully");
       localStorage.setItem("authToken", true);
+      localStorage.setItem("accessToken", response.data?.token?.accessToken);
+
       navigate("/");
     } catch (err) {
       console.log(error);
@@ -55,7 +60,7 @@ const Login = () => {
       sx={{ boxShadow: 5 }}
       backgroundColor={theme.palette.background.alt}
     >
-      <Collapse in={error !== ''}>
+      <Collapse in={error !== ""}>
         <Alert severity="error" sx={{ mb: 2 }}>
           {error}
         </Alert>

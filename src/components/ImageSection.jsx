@@ -14,7 +14,14 @@ import {
   Card,
 } from "@mui/material";
 
-const ImageSection = ({ apiEndpoint, title, placeholder, altText,loading,setLoading }) => {
+const ImageSection = ({
+  apiEndpoint,
+  title,
+  placeholder,
+  altText,
+  loading,
+  setLoading,
+}) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
@@ -26,9 +33,19 @@ const ImageSection = ({ apiEndpoint, title, placeholder, altText,loading,setLoad
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true)
-      const { data } = await axios.post(apiEndpoint, { text });
-      setLoading(false)
+      setLoading(true);
+      let jwtToken = localStorage.getItem("accessToken");
+
+      const { data } = await axios.post(
+        apiEndpoint,
+        { text },
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+      setLoading(false);
       setImage(data);
     } catch (err) {
       if (err.response.data.error) {
@@ -45,9 +62,16 @@ const ImageSection = ({ apiEndpoint, title, placeholder, altText,loading,setLoad
   return (
     <>
       {!loggedIn ? (
-        <Box p={10} sx={{ display: 'flex', justifyContent: 'center', alignContent: 'flex-start' }}>
+        <Box
+          p={10}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "flex-start",
+          }}
+        >
           <Typography variant="h3">
-            Please <Link to={'/login'}>Log In</Link> to Continue
+            Please <Link to={"/login"}>Log In</Link> to Continue
           </Typography>
         </Box>
       ) : (
@@ -59,7 +83,7 @@ const ImageSection = ({ apiEndpoint, title, placeholder, altText,loading,setLoad
           sx={{ boxShadow: 5 }}
           backgroundColor={theme.palette.background.alt}
         >
-          <Collapse in={error !== ''}>
+          <Collapse in={error !== ""}>
             <Alert severity="error" sx={{ mb: 2 }}>
               {error}
             </Alert>
