@@ -13,6 +13,7 @@ import {
   Collapse,
   Card,
 } from "@mui/material";
+import { saveAs } from "file-saver";
 
 const ImageSection = ({
   apiEndpoint,
@@ -29,15 +30,75 @@ const ImageSection = ({
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
   const loggedIn = JSON.parse(localStorage.getItem("authToken"));
+  let jwtToken = localStorage.getItem("accessToken");
 
-  const handleSubmit = async (e) => {
+  const downloadImage = () => {
+    try {
+      // Use saveAs directly with the image link
+      saveAs(image, "image.jpg");
+    } catch (error) {
+      console.error("Error downloading image:", error);
+      // Handle the error, e.g., show a toast or display an error message.
+    }
+  };
+  const handleLofiubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      let jwtToken = localStorage.getItem("accessToken");
-
       const { data } = await axios.post(
-        apiEndpoint,
+        "http://localhost:8080/api/v1/openai/lofi-image",
+        { text },
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+      setLoading(false);
+      setImage(data);
+    } catch (err) {
+      if (err.response.data.error) {
+        setError(err.response.data.error);
+      } else if (err.message) {
+        setError(err.message);
+      }
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    }
+  };
+  const handleAnimeSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        "http://localhost:8080/api/v1/openai/anime-image",
+        { text },
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+      setLoading(false);
+      setImage(data);
+    } catch (err) {
+      if (err.response.data.error) {
+        setError(err.response.data.error);
+      } else if (err.message) {
+        setError(err.message);
+      }
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    }
+  };
+  const handleScifiSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        "http://localhost:8080/api/v1/openai/scifi-image",
         { text },
         {
           headers: {
@@ -88,7 +149,7 @@ const ImageSection = ({
               {error}
             </Alert>
           </Collapse>
-          <form onSubmit={handleSubmit}>
+          <form>
             <Typography variant="h3">{title}</Typography>
             <TextField
               placeholder={placeholder}
@@ -102,7 +163,6 @@ const ImageSection = ({
                 setText(e.target.value);
               }}
             />
-
             <Button
               type="submit"
               fullWidth
@@ -110,8 +170,31 @@ const ImageSection = ({
               size="large"
               sx={{ color: "white", mt: 2 }}
               disabled={loading}
+              onClick={handleScifiSubmit}
             >
-              Submit
+              generate scifi image{" "}
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              size="large"
+              sx={{ color: "white", mt: 2 }}
+              disabled={loading}
+              onClick={handleLofiubmit}
+            >
+              generate lofi image
+            </Button>{" "}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              size="large"
+              sx={{ color: "white", mt: 2 }}
+              disabled={loading}
+              onClick={handleAnimeSubmit}
+            >
+              generate anime image
             </Button>
             <Typography mt={2}>
               Not this tool? <Link to="/">GO BACK</Link>
@@ -119,21 +202,33 @@ const ImageSection = ({
           </form>
 
           {image ? (
-            <Card
-              sx={{
-                mt: 4,
-                border: 1,
-                boxShadow: 0,
-                height: "500px",
-                borderRadius: 5,
-                borderColor: "natural.medium",
-                bgcolor: "background.default",
-              }}
-            >
-              <Box sx={{ display: "flex", justifyContent: "center", my: 5 }}>
-                <img src={image} alt={altText} />
-              </Box>
-            </Card>
+            <>
+              <Button
+                fullWidth
+                variant="contained"
+                size="large"
+                sx={{ color: "white", mt: 2 }}
+                disabled={loading}
+                onClick={downloadImage}
+              >
+                download image
+              </Button>
+              <Card
+                sx={{
+                  mt: 4,
+                  border: 1,
+                  boxShadow: 0,
+                  height: "500px",
+                  borderRadius: 5,
+                  borderColor: "natural.medium",
+                  bgcolor: "background.default",
+                }}
+              >
+                <Box sx={{ display: "flex", justifyContent: "center", my: 5 }}>
+                  <img src={image} alt={altText} />
+                </Box>
+              </Card>
+            </>
           ) : (
             <Card
               sx={{

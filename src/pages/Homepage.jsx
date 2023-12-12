@@ -7,6 +7,7 @@ import ChatRounded from "@mui/icons-material/ChatRounded";
 import ImageSearchIcon from "@mui/icons-material/ImageSearch";
 import EmailIcon from "@mui/icons-material/Email";
 import CodeIcon from "@mui/icons-material/Code";
+import HistoryIcon from "@mui/icons-material/History";
 const Homepage = () => {
   const navigate = useNavigate();
   return (
@@ -339,7 +340,7 @@ const Homepage = () => {
           }}
         >
           <Typography variant="h4" mb={2} fontWeight="bold">
-            Javascript Converter
+            History{" "}
           </Typography>
           <Card
             onClick={() => navigate("/history")}
@@ -359,7 +360,7 @@ const Homepage = () => {
               },
             }}
           >
-            <CodeIcon
+            <HistoryIcon
               sx={{ fontSize: 80, color: "primary.main", mt: 2, ml: 2 }}
             />
             <Stack
